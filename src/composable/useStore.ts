@@ -20,6 +20,6 @@ function setAppStatusError() {
   appStatus.value = APP_STATUS.ERROR
 }
 
-export default function useStore() {
+export default function useStore(response: any) {
   return { APP_STATUS, appStatus, setAppStatusLoading, setAppStatusChatMode, setAppStatusError }
 }

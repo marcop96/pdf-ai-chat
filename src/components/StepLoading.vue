@@ -11,10 +11,9 @@
         Chat with your PDF
       </h3>
       <div class="w-full h-96 bg-white rounded-lg shadow-lg flex flex-col items-center justify-center">
-        <p class="text-2xl font-bold text-gray-500 animate-spin loader"></p>
-        <div class="lds-ellipsis">
+        <h2 class="text-2xl p-5 font-bold text-gray-500 ">processing your file</h2>
+        <p class="text-2xl  font-bold text-gray-500 anima1te-spin loader"></p>
 
-        </div>
       </div>
     </div>
   </div>

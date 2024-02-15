@@ -3,11 +3,11 @@ import { ref } from 'vue'
 import { useDropZone } from '@vueuse/core'
 import useStore from '../composable/useStore';
 
-const { setAppStatusLoading } = useStore();
+const { setAppStatusLoading, setAppStatusChatMode, setAppStatusError } = useStore();
 
 const filesData = ref<{ name: string, size: number, type: string, lastModified: number }[]>([])
 
-function onDrop(files: File[] | null) {
+async function onDrop(files: File[] | null) {
   filesData.value = []
   if (files) {
     filesData.value = files.map(file => ({
@@ -16,7 +16,23 @@ function onDrop(files: File[] | null) {
       type: file.type,
       lastModified: file.lastModified,
     }))
+    if (filesData.value.length > 0) {
+      const formData = new FormData()
+      formData.append('file', files[0])
 
+      const res = await fetch('api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+      if (!res.ok) {
+        setAppStatusError()
+        return
+      }
+      const result = await res.json()
+      console.log((resuilt))
+      setAppStatusChatMode(result)
+
+    }
     setAppStatusLoading()
   }
 }
