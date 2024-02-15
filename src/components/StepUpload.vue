@@ -18,12 +18,13 @@ async function onDrop(files: File[] | null) {
     }))
     if (filesData.value.length > 0) {
       const formData = new FormData()
-      formData.append('file', files[0])
+      formData.append("file", files[0])
 
-      const res = await fetch('api/upload', {
-        method: 'POST',
+      const res = await fetch("/api/upload", {
+        method: "POST",
         body: formData,
       })
+
       if (!res.ok) {
         setAppStatusError()
         return

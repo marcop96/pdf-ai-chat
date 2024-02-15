@@ -17,5 +17,7 @@ const { APP_STATUS, appStatus } = useStore();
   <StepChat v-if="appStatus === APP_STATUS.CHAT_MODE" />
 
   <div v-if="appStatus === APP_STATUS.ERROR" class="text-4xl font-bold text-white">
-    ERROR, TRY REALOADING</div>
+    ERROR, TRY REALOADING
+    <p>ERROR</p>
+  </div>
 </template>
