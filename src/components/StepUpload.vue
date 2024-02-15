@@ -3,10 +3,9 @@ import { ref } from 'vue'
 import { useDropZone } from '@vueuse/core'
 import useStore from '../composable/useStore';
 
-const { APP_STATUS, appStatus } = useStore();
+const { setAppStatusLoading } = useStore();
 
 const filesData = ref<{ name: string, size: number, type: string, lastModified: number }[]>([])
-const imageFilesData = ref<{ name: string, size: number, type: string, lastModified: number }[]>([])
 
 function onDrop(files: File[] | null) {
   filesData.value = []
@@ -18,33 +17,17 @@ function onDrop(files: File[] | null) {
       lastModified: file.lastModified,
     }))
 
-    appStatus.value = APP_STATUS.LOADING
+    setAppStatusLoading()
   }
 }
 
-
-function onImageDrop(files: File[] | null) {
-  imageFilesData.value = []
-  if (files) {
-    imageFilesData.value = files.map(file => ({
-      name: file.name,
-      size: file.size,
-      type: file.type,
-      lastModified: file.lastModified,
-    }))
-
-
-  }
-}
 
 const dropZoneRef = ref<HTMLElement>()
-const imageDropZoneRef = ref<HTMLElement>()
 
 
 const { isOverDropZone } = useDropZone(dropZoneRef, onDrop)
 
 
-const { isOverDropZone: isOverImageDropZone } = useDropZone(imageDropZoneRef, { dataTypes: ['image/png'], onDrop: onImageDrop })
 
 
 </script>

@@ -9,10 +9,17 @@ const APP_STATUS = {
 }
 const appStatus = ref(APP_STATUS.INIT)
 
+
+function setAppStatusLoading() {
+  appStatus.value = APP_STATUS.LOADING
+}
+function setAppStatusChatMode() {
+  appStatus.value = APP_STATUS.CHAT_MODE
+}
+function setAppStatusError() {
+  appStatus.value = APP_STATUS.ERROR
+}
+
 export default function useStore() {
-
-
-
-
-  return { APP_STATUS, appStatus }
+  return { APP_STATUS, appStatus, setAppStatusLoading, setAppStatusChatMode, setAppStatusError }
 }
