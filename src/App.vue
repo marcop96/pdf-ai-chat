@@ -1,11 +1,13 @@
 <script setup lang='ts'>
 
+
 import StepChat from './components/StepChat.vue';
 import StepLoading from './components/StepLoading.vue';
 import StepUpload from './components/StepUpload.vue';
-import useStore from './composable/useStore';
+import useStore from './composable/useAppStatus';
 
 const { APP_STATUS, appStatus } = useStore();
+
 
 </script>
 

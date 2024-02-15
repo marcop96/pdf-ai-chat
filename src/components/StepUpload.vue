@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useDropZone } from '@vueuse/core'
+import useAppStatus from '../composable/useAppStatus';
+
+const { APP_STATUS, appStatus } = useAppStatus();
 
 const filesData = ref<{ name: string, size: number, type: string, lastModified: number }[]>([])
 const imageFilesData = ref<{ name: string, size: number, type: string, lastModified: number }[]>([])
@@ -14,8 +17,11 @@ function onDrop(files: File[] | null) {
       type: file.type,
       lastModified: file.lastModified,
     }))
+
+    appStatus.value = APP_STATUS.LOADING
   }
 }
+
 
 function onImageDrop(files: File[] | null) {
   imageFilesData.value = []
@@ -26,6 +32,8 @@ function onImageDrop(files: File[] | null) {
       type: file.type,
       lastModified: file.lastModified,
     }))
+
+
   }
 }
 
@@ -37,6 +45,8 @@ const { isOverDropZone } = useDropZone(dropZoneRef, onDrop)
 
 
 const { isOverDropZone: isOverImageDropZone } = useDropZone(imageDropZoneRef, { dataTypes: ['image/png'], onDrop: onImageDrop })
+
+
 </script>
 
 <template>
@@ -49,8 +59,8 @@ const { isOverDropZone: isOverImageDropZone } = useDropZone(imageDropZoneRef, { 
 
 
       <div class="flex justify-center  h-screen">
-        <div ref="dropZoneRef" class="flex h-32 w-64 mt-6 rounded bg-red-500 justify-center items-center">
-          <p>Drop your PDF here</p>
+        <div ref="dropZoneRef" class="flex h-64 </div>w-64 mt-6 rounded bg-red-500 justify-center items-center">
+          <p v-if="filesData.length === 0">Drop your PDF here</p>
           <div class="flex justify-center ">
             <div v-for="(file, index) in filesData" :key="index" class="w-200px bg-black-200/10 ma-2 pa-6">
               <p>Name: {{ file.name }}</p>
