@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useDropZone } from '@vueuse/core'
-import useAppStatus from '../composable/useAppStatus';
+import useStore from '../composable/useStore';
 
-const { APP_STATUS, appStatus } = useAppStatus();
+const { APP_STATUS, appStatus } = useStore();
 
 const filesData = ref<{ name: string, size: number, type: string, lastModified: number }[]>([])
 const imageFilesData = ref<{ name: string, size: number, type: string, lastModified: number }[]>([])

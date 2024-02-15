@@ -4,7 +4,7 @@
 import StepChat from './components/StepChat.vue';
 import StepLoading from './components/StepLoading.vue';
 import StepUpload from './components/StepUpload.vue';
-import useStore from './composable/useAppStatus';
+import useStore from './composable/useStore';
 
 const { APP_STATUS, appStatus } = useStore();
 
