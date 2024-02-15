@@ -29,7 +29,6 @@ async function onDrop(files: File[] | null) {
         return
       }
       const result = await res.json()
-      console.log((resuilt))
       setAppStatusChatMode(result)
 
     }
